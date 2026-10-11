@@ -15,7 +15,7 @@ namespace ValeriusCustomPrefabs
     {
         public const string PluginGUID = "com.valerius.customprefabs";
         public const string PluginName = "Valerius Custom Prefabs";
-        public const string PluginVersion = "0.1.3";
+        public const string PluginVersion = "0.1.4";
 
         private void Awake()
         {

@@ -374,3 +374,6 @@ Directory.Build.props
 
 # Generated Thunderstore DLLs
 */Package/plugins/
+
+# Generated Thunderstore package
+ValeriusCustomPrefabs/Package/
