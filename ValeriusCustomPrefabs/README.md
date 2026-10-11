@@ -22,34 +22,10 @@ BepInEx/plugins/ValeriusCustomPrefabs.dll
 
 | Name | Token | Based on |
 |---|---|---|
-| Dungeon Marker | `dungeon_marker` | Ward (`guard_stone`) |
+| Dungeon Marker | `ValeriusDungeonMarker` | Ward (`guard_stone`) |
 
-* Specifically made to be used when scripting using Expand World Prefabs
-* Used to limit scripting events to a certain area so that they dont affect the entire world 
+* Set the script_id custom value for use in constraining **Expand World Prefab** scripts to a set location opposed to affected the entire in-game world.
 
-e.g 
-
-- prefab: Greydwarf
-  type: destroy
-  objects:
-    - prefab: ValeriusDungeonMarker
-  poke:
-    - prefab: woodwall
-      maxDistance: 10
-
-- prefab: woodwall
-  type: poke
-  exec: <save++_enemyCount>
-
-- prefab: wood_wall_half
-  type: poke
-  condition: <load_enemyCount=0> = 2
-  poke:
-    - prefab: stone_floor_2x2
-
-- prefab: stone_floor_2x2
-  type: poke
-  remove: true
 
 ### Invisible Prefabs
 
@@ -72,9 +48,18 @@ Because the pieces are invisible when at full health, the  **PlanBuild** mod or 
 
 ## Known Issues
 
-* The invisible come with the issue of being invisible.
+* The invisible comes with the issue of being invisible.
+* The dungeon marker causes TeleportWorld errors to spam console but does not impact gameplay. 
+
+## Github
+
+- This project is available on github at 'https://github.com/SevDevonne/valheim-custom-prefabs'
+
 
 ## Changelog
+
+## 0.1.4
+* Added Valerius Custom Prefabs to Github
 
 ## 0.1.3
 * Added Invisible Boundary Floor 4x4.
@@ -93,6 +78,7 @@ Because the pieces are invisible when at full health, the  **PlanBuild** mod or 
 ### 0.1.0
 
 * Added Invisible Boundary Wall.
+
 
 ## AI Declaration 
 
