@@ -1,0 +1,9 @@
+{
+  "name": "Valerius_Custom_Prefabs",
+  "version_number": "0.1.3",
+  "website_url": "",
+  "description": "Adds custom building prefabs to Valheim.",
+  "dependencies": [
+    "ValheimModding-Jotunn-2.27.1"
+  ]
+}
