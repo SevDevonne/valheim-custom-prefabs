@@ -33,7 +33,7 @@ try {
     $PluginsPath = Join-Path $PackagePath 'plugins'
     $ReleasesPath = Join-Path $RepoPath 'Releases'
 
-    # Read version from plugin source.
+    # Read version from the plugin source.
     $versionSource = Join-Path $SourcePath 'ValeriusCustomPrefabs.cs'
 
     if (!(Test-Path $versionSource)) {
@@ -45,8 +45,11 @@ try {
     if ($sourceCode -match 'PluginVersion\s*=\s*"([^"]+)"') {
         $version = $Matches[1]
     }
+    elseif ($sourceCode -match '\[BepInPlugin\(\s*"[^"]+"\s*,\s*"[^"]+"\s*,\s*"([^"]+)"\s*\)\]') {
+        $version = $Matches[1]
+    }
     else {
-        throw "Could not determine PluginVersion from $versionSource"
+        throw "Could not determine plugin version from $versionSource"
     }
 
     # Use UTF-8 without BOM for text files.
@@ -97,7 +100,7 @@ try {
         $manifestDestination = Join-Path $pluginFolder 'manifest.json'
 
         $manifest = [System.IO.File]::ReadAllText($manifestSource) |
-            ConvertFrom-Json
+        ConvertFrom-Json
 
         $manifest.version_number = $version
 
@@ -136,15 +139,15 @@ try {
 
     # Copy icon.
     Copy-Item `
-        (Join-Path $SourcePath 'icon.png') `
-        (Join-Path $PackagePath 'icon.png') -Force
+    (Join-Path $SourcePath 'icon.png') `
+    (Join-Path $PackagePath 'icon.png') -Force
 
     # Update packaged manifest version and write without BOM.
     $manifestSource = Join-Path $SourcePath 'manifest.json'
     $manifestDestination = Join-Path $PackagePath 'manifest.json'
 
     $manifest = [System.IO.File]::ReadAllText($manifestSource) |
-        ConvertFrom-Json
+    ConvertFrom-Json
 
     $manifest.version_number = $version
 
