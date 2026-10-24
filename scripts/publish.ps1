@@ -34,7 +34,7 @@ try {
     $ReleasesPath = Join-Path $RepoPath 'Releases'
 
     # Read version from the plugin source.
-    $versionSource = Join-Path $SourcePath 'ValeriusCustomPrefabs.cs'
+    $versionSource = Join-Path $SourcePath 'src\ValeriusCustomPrefabs.cs'
 
     if (!(Test-Path $versionSource)) {
         throw "Version source not found: $versionSource"

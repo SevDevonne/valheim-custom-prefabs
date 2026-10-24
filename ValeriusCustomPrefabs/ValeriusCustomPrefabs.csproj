@@ -38,12 +38,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-    <None Include="README.md" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="JotunnLib" Version="2.27.1" />
   </ItemGroup>
 
@@ -92,13 +86,13 @@
 
   <Target Name="JotunnPostBuildTaskWin"
           AfterTargets="Build"
-          Condition="'$(OS)' == 'Windows_NT'">
+          Condition="'$(OS)' == 'Windows_NT' and Exists('$(MSBuildProjectDirectory)\..\scripts\publish.ps1')">
 
     <Exec Command="powershell.exe -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\..\scripts\publish.ps1&quot; -Target &quot;$(Configuration)&quot; -TargetPath &quot;$(TargetDir.TrimEnd('\'))&quot; -TargetAssembly &quot;$(TargetFileName)&quot; -ValheimPath &quot;$(VALHEIM_INSTALL.TrimEnd('\'))&quot; -DeployPath &quot;$(MOD_DEPLOYPATH)&quot; -ProjectPath &quot;$(MSBuildProjectDirectory)&quot;" />
 
   </Target>
 
-  <Target Name="JotunnPostBuildTaskUnix" AfterTargets="Build" Condition=" '$(OS)' == 'Unix' ">
+  <Target Name="JotunnPostBuildTaskUnix" AfterTargets="Build" Condition=" '$(OS)' == 'Unix' and Exists('$(SolutionDir)scripts/publish.sh') ">
     <Exec  Command="sh &quot;$(SolutionDir)scripts/publish.sh&quot; --target &quot;$(ConfigurationName)&quot; --target-path &quot;$(TargetDir)&quot; --target-assembly &quot;$(TargetFileName)&quot; --valheim-path &quot;$(VALHEIM_INSTALL)&quot; --deploy-path &quot;$(MOD_DEPLOYPATH)&quot; --project-path &quot;$(ProjectDir)&quot;" />
   </Target>
 </Project>
